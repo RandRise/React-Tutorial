@@ -3,6 +3,8 @@ import { StudentServices } from '../../Services/studentService';
 import {
     ADD_STUDENT_REQUEST,
     ADD_STUDENT_SUCCESS,
+    DELETE_CITY_REQUEST,
+    DELETE_STUDENT_SUCCESS,
     EDIT_STUDENT_REQUEST,
     EDIT_STUDENT_SUCCESS,
     FETCH_STUDENTS_REQUEST,
@@ -17,6 +19,21 @@ function* getStudentsFetch(): Generator<any, void, any> {
     yield put({ type: FETCH_STUDENTS_SUCCESS, students })
 }
 
+function* deleteStudentSaga(action: any): Generator<any, void, any> {
+    try {
+        const response = yield StudentServices.deleteStudentService(action.payload)
+        if (response.statusCode === 200) {
+            yield put({ type: DELETE_STUDENT_SUCCESS, payload: response });
+            yield put({ type: FETCH_STUDENTS_REQUEST });
+        }
+        else {
+            yield put({ type: GET_GENERAL_RESPONSE, payload: response })
+        }
+    } catch (error) {
+        console.log("Error Deleting Student Record From Saga", error);
+    }
+}
+
 function* addStudentSaga(action: any): Generator<any, void, any> {
     try {
         const { student } = action.payload;
@@ -27,7 +44,7 @@ function* addStudentSaga(action: any): Generator<any, void, any> {
         } else {
             yield put({ type: GET_GENERAL_RESPONSE, payload: response })
         }
-    } catch(error) {
+    } catch (error) {
         console.log("ERROR adding Student", error)
     }
 }
@@ -48,7 +65,10 @@ function* editStudentSaga(action: any): Generator<any, void, any> {
     }
 }
 
-function* watchAddStudentSaga(): Generator<any,void,any> {
+function* watchDeleteStudentSaga(): Generator<any, void, any>{
+    yield takeEvery(DELETE_CITY_REQUEST, deleteStudentSaga)
+}
+function* watchAddStudentSaga(): Generator<any, void, any> {
     yield takeEvery(ADD_STUDENT_REQUEST, addStudentSaga)
 }
 
@@ -65,5 +85,6 @@ export default function* StudentSaga() {
         watchStudentsFetchSaga(),
         watchEditStudentSaga(),
         watchAddStudentSaga(),
+        watchDeleteStudentSaga(),
     ]);
 };

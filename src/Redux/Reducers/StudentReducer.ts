@@ -2,7 +2,8 @@ import { StudentState } from "../../States/StudentState";
 import {
     FETCH_STUDENTS_SUCCESS,
     EDIT_STUDENT_SUCCESS,
-    ADD_STUDENT_SUCCESS
+    ADD_STUDENT_SUCCESS,
+    DELETE_STUDENT_SUCCESS
 } from "../Actions/Types";
 
 const initialState: StudentState = {
@@ -18,6 +19,8 @@ const studentsReducer = (state = initialState, action: any): StudentState => {
         case EDIT_STUDENT_SUCCESS:
             return { ...state, isLoading: false, response: action.payload }
         case ADD_STUDENT_SUCCESS:
+            return { ...state, isLoading: false, response: action.payload }
+        case DELETE_STUDENT_SUCCESS:
             return { ...state, isLoading: false, response: action.payload }
         default:
             return { ...state };

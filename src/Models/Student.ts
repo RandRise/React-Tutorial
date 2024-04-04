@@ -3,6 +3,6 @@ export interface Student {
     first_name: string,
     last_name: string,
     date_of_birth: string,
-    city_of_birth_id: number
-    img: string,
+    city_of_birth_id: number,
+    img: string
 }

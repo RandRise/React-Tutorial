@@ -42,9 +42,9 @@ const StudentTable: React.FC<StudentTableProps> = (props: StudentTableProps) => 
             key: "img",
             render: (text: any, record: Student) =>
                 record.img ? (
-                    <img src={`/uploads/images/${record.img}`} style={{ width: 64, height: 64 }} />
+                    <img src={`data:image/png;base64, ${record.img}`} style={{width: '64px', height: '64px'}} />
                 ) : null
-
+            
         },
         {
             title: "Full Name",
