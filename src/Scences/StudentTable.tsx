@@ -7,6 +7,7 @@ import EditStudentButton from "../Components/UIComponents/EditStudentButton";
 import { City } from "../Models/City";
 import { ICommonResponse } from "../Components/common/CommonInterfaces";
 import AddStudentButton from "../Components/UIComponents/AddStudentButton";
+import DeleteStudentButton from "../Components/UIComponents/DeleteStudentButton";
 
 
 interface StudentTableProps {
@@ -42,9 +43,9 @@ const StudentTable: React.FC<StudentTableProps> = (props: StudentTableProps) => 
             key: "img",
             render: (text: any, record: Student) =>
                 record.img ? (
-                    <img src={`data:image/png;base64, ${record.img}`} style={{width: '64px', height: '64px'}} />
+                    <img src={`data:image/png;base64, ${record.img}`} style={{ width: '64px', height: '64px' }} />
                 ) : null
-            
+
         },
         {
             title: "Full Name",
@@ -69,6 +70,7 @@ const StudentTable: React.FC<StudentTableProps> = (props: StudentTableProps) => 
             render: (text: any, record: Student) => (
                 <>
                     <Space>
+                        <DeleteStudentButton sId={record.student_id} />
                         <EditStudentButton student={record} />
                     </Space>
                 </>

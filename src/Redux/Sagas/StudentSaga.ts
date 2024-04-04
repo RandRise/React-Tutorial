@@ -3,7 +3,7 @@ import { StudentServices } from '../../Services/studentService';
 import {
     ADD_STUDENT_REQUEST,
     ADD_STUDENT_SUCCESS,
-    DELETE_CITY_REQUEST,
+    DELETE_STUDENT_REQUEST,
     DELETE_STUDENT_SUCCESS,
     EDIT_STUDENT_REQUEST,
     EDIT_STUDENT_SUCCESS,
@@ -65,8 +65,8 @@ function* editStudentSaga(action: any): Generator<any, void, any> {
     }
 }
 
-function* watchDeleteStudentSaga(): Generator<any, void, any>{
-    yield takeEvery(DELETE_CITY_REQUEST, deleteStudentSaga)
+function* watchDeleteStudentSaga(): Generator<any, void, any> {
+    yield takeEvery(DELETE_STUDENT_REQUEST, deleteStudentSaga)
 }
 function* watchAddStudentSaga(): Generator<any, void, any> {
     yield takeEvery(ADD_STUDENT_REQUEST, addStudentSaga)

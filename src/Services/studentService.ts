@@ -33,6 +33,7 @@ export class StudentServices {
             }
         }
     }
+
     static async addStudentService(student: Student): Promise<ICommonResponse> {
         try {
 
@@ -42,7 +43,6 @@ export class StudentServices {
             formData.append("date_of_birth", student.date_of_birth);
             formData.append("city_of_birth_id", student.city_of_birth_id.toString());
             formData.append("img", student.img);
-            console.log("Image Requested", student.img.toString());
 
             const response = await axios.post(StudentAPI, formData, {
                 headers: {
@@ -59,7 +59,21 @@ export class StudentServices {
 
     static async editStudentService(student: Student): Promise<ICommonResponse> {
         try {
-            const response = await axios.put<ICommonResponse>(`${StudentAPI}/${student.student_id}`, student)
+            var formData = new FormData();
+            formData.append("first_name", student.first_name);
+            formData.append("last_name", student.last_name);
+            formData.append("date_of_birth", student.date_of_birth);
+            formData.append("city_of_birth_id", student.city_of_birth_id.toString());
+            formData.append("img", student.img);
+
+            console.log("Image Requested", student.img.toString());
+
+            const response = await axios.put<ICommonResponse>(`${StudentAPI}/${student.student_id}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
             return response.data;
         } catch (error) {
             console.error('Error editing student', error);
@@ -69,8 +83,9 @@ export class StudentServices {
                 exception: error,
                 result: [],
             };
-        };
+        }
     };
+
 
 
 };

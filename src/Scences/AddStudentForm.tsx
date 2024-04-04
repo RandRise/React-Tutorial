@@ -33,9 +33,6 @@ const AddStudentForm: React.FC<AddStudentProps> = ({ onSubmit, onClose, cities }
         }
     };
 
-
-    console.log("Base64Image", image)
-
     return (
         <Form
             initialValues={{ remember: true }}
